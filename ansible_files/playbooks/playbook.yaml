@@ -1,0 +1,18 @@
+---
+- name: Install Apache server
+  hosts: web
+  become: yes
+  tasks:
+    - name: Ensure latest version of Apache server installed
+      yum:
+        name: httpd
+        state: latest
+    - name: Ensure appache is up and running
+      service:
+        name: httpd
+        enabled: true
+        state: started
+    - name: Copy index.html from control node
+      copy:
+        src: ~/ansible_files/html_dir/index.html
+        dest: /var/www/html/

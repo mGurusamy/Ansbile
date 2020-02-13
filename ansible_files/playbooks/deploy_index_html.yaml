@@ -1,0 +1,9 @@
+---
+- name: Copy index.html
+  hosts: node1
+  become: yes
+  tasks:
+    - name: Ensure index.html copied to the managed nodes
+      copy:
+        src: ~/ansible_files/html_dir/{{ stage }}_index.html
+        dest: /var/www/html/index.html
